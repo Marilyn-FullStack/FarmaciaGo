@@ -1,10 +1,14 @@
 package com.generation.farmacia.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -21,6 +25,9 @@ public class Categoria {
 	@NotBlank(message = "O atributo nome é obrigatório!")
 	@Size(min = 7, max = 100, message = "O atributo nome deve conter no mínimo 7 e no máximo 100 caracteres")
 	private String descricao;
+
+	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+	private List<Produto> produtos;
 
 	// Construtores, getters e setters
 	public Categoria() {
